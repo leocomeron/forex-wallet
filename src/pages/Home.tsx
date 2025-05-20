@@ -36,7 +36,7 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full mx-auto p-8 bg-[#240837] rounded-lg border border-[#87e2ae] shadow-lg">
+    <div className="w-full max-w-md mx-auto p-4 sm:p-8 bg-[#240837] rounded-lg border border-[#87e2ae] shadow-lg">
       <h1 className="text-3xl font-bold text-center mb-8 text-white">
         Cartera Virtual de Divisas
       </h1>
