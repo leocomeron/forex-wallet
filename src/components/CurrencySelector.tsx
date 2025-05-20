@@ -2,10 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import Chevron from "./icons/Chevron";
 import { getCurrencies } from "../api/coinbase";
 import type { Currency, CurrencySelectorProps } from "../types";
+import { getStoredCurrencies, setStoredCurrencies } from "../utils/storage";
 
 const CurrencySelector = ({ onCurrenciesChange }: CurrencySelectorProps) => {
   const [currencies, setCurrencies] = useState<Currency[]>([]);
-  const [selectedCurrencies, setSelectedCurrencies] = useState<string[]>([]);
+  const [selectedCurrencies, setSelectedCurrencies] =
+    useState<string[]>(getStoredCurrencies);
   const [error, setError] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -22,6 +24,11 @@ const CurrencySelector = ({ onCurrenciesChange }: CurrencySelectorProps) => {
 
     fetchCurrencies();
   }, []);
+
+  useEffect(() => {
+    setStoredCurrencies(selectedCurrencies);
+    onCurrenciesChange(selectedCurrencies);
+  }, [selectedCurrencies, onCurrenciesChange]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -76,7 +83,7 @@ const CurrencySelector = ({ onCurrenciesChange }: CurrencySelectorProps) => {
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="w-full p-3 text-left border-[#87e2ae] rounded-md bg-[#240837] text-white focus:outline-none focus:ring-2 focus:ring-[#87e2ae] focus:border-[#87e2ae] hover:border-[#a5e9c4]"
+          className="w-full p-3 text-left ring-1 ring-[#87e2ae] rounded-md bg-[#240837] text-white focus:outline-none focus:ring-2 focus:ring-[#87e2ae] focus:border-[#87e2ae] hover:border-[#a5e9c4]"
         >
           <div className="flex justify-between items-center">
             <span className="text-white truncate">

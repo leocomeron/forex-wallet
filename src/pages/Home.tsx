@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CurrencySelector from "../components/CurrencySelector";
+import {
+  getStoredBalance,
+  setStoredBalance,
+  setStoredCurrencies,
+} from "../utils/storage";
 
 const Home = () => {
-  const [balance, setBalance] = useState<string>("");
+  const [balance, setBalance] = useState<string>(getStoredBalance);
   const [selectedCurrencies, setSelectedCurrencies] = useState<string[]>([]);
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setStoredBalance(balance);
+  }, [balance]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,12 +31,7 @@ const Home = () => {
       return;
     }
 
-    localStorage.setItem("balance", balance);
-    localStorage.setItem(
-      "selectedCurrencies",
-      JSON.stringify(selectedCurrencies)
-    );
-
+    setStoredCurrencies(selectedCurrencies);
     navigate("/results");
   };
 
