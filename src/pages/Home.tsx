@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CurrencySelector from "../components/CurrencySelector";
+import InitialBalanceInput from "../components/InitialBalanceInput";
+import ErrorMessage from "../components/ErrorMessage";
 import {
   getStoredBalance,
   setStoredBalance,
@@ -40,35 +42,10 @@ const Home = () => {
       <h1 className="text-3xl font-bold text-center mb-8 text-white">
         Cartera Virtual de Divisas
       </h1>
-
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label
-            htmlFor="balance"
-            className="block text-sm font-medium text-white mb-2"
-          >
-            Saldo inicial (EUR)
-          </label>
-          <input
-            type="number"
-            id="balance"
-            value={balance}
-            onChange={(e) => setBalance(e.target.value)}
-            className="w-full p-3 border border-mint rounded-md bg-blueberry text-white focus:ring-2 focus:ring-mint focus:border-mint outline-none transition placeholder-gray-400"
-            placeholder="Ingresa tu saldo en EUR"
-            step="0.01"
-            min="0"
-          />
-        </div>
-
+        <InitialBalanceInput balance={balance} onBalanceChange={setBalance} />
         <CurrencySelector onCurrenciesChange={setSelectedCurrencies} />
-
-        {error && (
-          <div className="text-red-400 text-sm bg-red-900/20 p-3 rounded-md">
-            {error}
-          </div>
-        )}
-
+        {error && <ErrorMessage message={error} />}
         <button
           type="submit"
           className="w-full bg-mint text-blueberry py-3 px-4 rounded-md hover:opacity-90 transition-colors font-medium"

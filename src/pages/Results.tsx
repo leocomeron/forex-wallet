@@ -4,6 +4,7 @@ import { getExchangeRates } from "../api/coinbase";
 import ResultCard from "../components/ResultCard";
 import ResultCardSkeleton from "../components/ResultCardSkeleton";
 import type { Conversion } from "../types";
+import { getStoredBalance, getStoredCurrencies } from "../utils/storage";
 
 const Results = () => {
   const [balance, setBalance] = useState<string>("");
@@ -14,8 +15,8 @@ const Results = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedBalance = localStorage.getItem("balance");
-    const storedCurrencies = localStorage.getItem("selectedCurrencies");
+    const storedBalance = getStoredBalance();
+    const storedCurrencies = getStoredCurrencies();
 
     if (!storedBalance || !storedCurrencies) {
       navigate("/");
@@ -23,7 +24,7 @@ const Results = () => {
     }
 
     setBalance(storedBalance);
-    setSelectedCurrencies(JSON.parse(storedCurrencies));
+    setSelectedCurrencies(storedCurrencies);
   }, [navigate]);
 
   useEffect(() => {
@@ -78,19 +79,18 @@ const Results = () => {
             </div>
           ) : (
             <div className="grid gap-4">
-              {loading
-                ? // Show 3 skeleton cards while loading
-                  Array.from({ length: 3 }).map((_, index) => (
-                    <ResultCardSkeleton key={index} />
-                  ))
-                : conversions.map((conversion) => (
-                    <ResultCard
-                      key={conversion.currency}
-                      currency={conversion.currency}
-                      rate={conversion.rate}
-                      amount={conversion.amount}
-                    />
-                  ))}
+              {loading ? (
+                <ResultCardSkeleton />
+              ) : (
+                conversions.map((conversion) => (
+                  <ResultCard
+                    key={conversion.currency}
+                    currency={conversion.currency}
+                    rate={conversion.rate}
+                    amount={conversion.amount}
+                  />
+                ))
+              )}
             </div>
           )}
         </div>
