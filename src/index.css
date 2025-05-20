@@ -19,7 +19,7 @@
 }
 
 body {
-  margin: 0;
+  margin: 8px;
   min-width: 300px;
   min-height: 100vh;
 }
