@@ -92,7 +92,7 @@ const CurrencySelector = ({ onCurrenciesChange }: CurrencySelectorProps) => {
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="w-full p-3 text-left ring-1 ring-[#87e2ae] rounded-md bg-[#240837] text-white focus:outline-none focus:ring-2 focus:ring-[#87e2ae] focus:border-[#87e2ae] hover:border-[#a5e9c4]"
+          className="w-full p-3 text-left ring-1 ring-mint rounded-md bg-blueberry text-white focus:outline-none focus:ring-2 focus:ring-mint focus:border-mint hover:border-[#a5e9c4]"
         >
           <div className="flex justify-between items-center">
             <span className="text-white truncate">
@@ -103,22 +103,20 @@ const CurrencySelector = ({ onCurrenciesChange }: CurrencySelectorProps) => {
         </button>
 
         {isOpen && (
-          <div className="absolute z-10 w-full mt-1 bg-[#240837] border border-[#87e2ae] rounded-md shadow-lg max-h-60 overflow-auto">
+          <div className="absolute z-10 w-full mt-1 bg-blueberry border border-mint rounded-md shadow-lg max-h-60 overflow-auto">
             {currencies.map((currency) => (
               <label
                 key={currency.id}
-                className={`flex items-center px-4 py-2 cursor-pointer hover:bg-[#87e2ae]/10
+                className={`flex items-center px-4 py-2 cursor-pointer hover:bg-mint/10
                   ${
-                    selectedCurrencies.includes(currency.id)
-                      ? "bg-[#87e2ae]/20"
-                      : ""
+                    selectedCurrencies.includes(currency.id) ? "bg-mint/20" : ""
                   }`}
               >
                 <input
                   type="checkbox"
                   checked={selectedCurrencies.includes(currency.id)}
                   onChange={() => handleCurrencyChange(currency.id)}
-                  className="h-4 w-4 text-[#87e2ae] rounded border-[#87e2ae] focus:ring-[#87e2ae]"
+                  className="h-4 w-4 text-mint rounded border-mint focus:ring-mint"
                 />
                 <span className="ml-3 text-white">{currency.name}</span>
               </label>
@@ -135,7 +133,7 @@ const CurrencySelector = ({ onCurrenciesChange }: CurrencySelectorProps) => {
         {selectedCurrencies.length > 0 && (
           <span
             onClick={handleClearSelection}
-            className="text-xs text-[#87e2ae] hover:text-[#a5e9c4] cursor-pointer"
+            className="text-xs text-mint hover:text-[#a5e9c4] cursor-pointer"
           >
             Limpiar selección
           </span>

@@ -1,7 +1,7 @@
 export default function Chevron({ isOpen }: { isOpen: boolean }) {
   return (
     <svg
-      className={`w-5 h-5 text-[#87e2ae] transition-transform ${
+      className={`w-5 h-5 text-mint transition-transform ${
         isOpen ? "transform rotate-180" : ""
       }`}
       fill="none"

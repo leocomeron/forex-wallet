@@ -55,17 +55,17 @@ const Results = () => {
   };
 
   return (
-    <div className="w-full mx-auto p-8 bg-[#240837] rounded-lg border border-[#87e2ae] shadow-lg">
+    <div className="w-full mx-auto p-8 bg-blueberry rounded-lg border border-mint shadow-lg">
       <h1 className="text-3xl font-bold text-center mb-8 text-white">
         Resultados
       </h1>
 
       <div className="space-y-6">
-        <div className="bg-[#87e2ae]/10 p-4 rounded-lg">
+        <div className="bg-mint/10 p-4 rounded-lg">
           <h2 className="text-xl font-semibold text-white mb-2">
             Saldo en EUR
           </h2>
-          <p className="text-2xl text-[#87e2ae]">
+          <p className="text-2xl text-mint">
             €{parseFloat(balance).toFixed(2)}
           </p>
         </div>
@@ -97,7 +97,7 @@ const Results = () => {
 
         <button
           onClick={handleBack}
-          className="w-full bg-[#87e2ae] text-[#240837] py-3 px-4 rounded-md hover:opacity-90 transition-colors font-medium"
+          className="w-full bg-mint text-blueberry py-3 px-4 rounded-md hover:opacity-90 transition-colors font-medium"
         >
           Volver
         </button>

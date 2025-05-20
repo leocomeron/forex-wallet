@@ -1,18 +1,17 @@
 @import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --color-blueberry: #240837;
+  --color-mint: #87e2ae;
+}
 
 :root {
-  --blueberry: #240837;
-  --mint: #87e2ae;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
   color: #ffffff;
-  background-color: var(--blueberry);
+  background-color: var(--color-blueberry);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -31,12 +30,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--blueberry);
+  background-color: var(--color-blueberry);
 }
 
 a {
   font-weight: 500;
-  color: var(--mint);
+  color: var(--color-mint);
   text-decoration: inherit;
 }
 a:hover {

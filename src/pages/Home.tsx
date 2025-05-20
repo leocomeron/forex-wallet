@@ -36,7 +36,7 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-4 sm:p-8 bg-[#240837] rounded-lg border border-[#87e2ae] shadow-lg">
+    <div className="w-full max-w-md mx-auto p-4 sm:p-8 bg-blueberry rounded-lg border border-mint shadow-lg">
       <h1 className="text-3xl font-bold text-center mb-8 text-white">
         Cartera Virtual de Divisas
       </h1>
@@ -54,7 +54,7 @@ const Home = () => {
             id="balance"
             value={balance}
             onChange={(e) => setBalance(e.target.value)}
-            className="w-full p-3 border border-[#87e2ae] rounded-md bg-[#240837] text-white focus:ring-2 focus:ring-[#87e2ae] focus:border-[#87e2ae] outline-none transition placeholder-gray-400"
+            className="w-full p-3 border border-mint rounded-md bg-blueberry text-white focus:ring-2 focus:ring-mint focus:border-mint outline-none transition placeholder-gray-400"
             placeholder="Ingresa tu saldo en EUR"
             step="0.01"
             min="0"
@@ -71,7 +71,7 @@ const Home = () => {
 
         <button
           type="submit"
-          className="w-full bg-[#87e2ae] text-[#240837] py-3 px-4 rounded-md hover:opacity-90 transition-colors font-medium"
+          className="w-full bg-mint text-blueberry py-3 px-4 rounded-md hover:opacity-90 transition-colors font-medium"
         >
           Ver Resultados
         </button>
