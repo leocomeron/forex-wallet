@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getExchangeRates } from "../api/coinbase";
 import ResultCard from "../components/ResultCard";
+import ResultCardSkeleton from "../components/ResultCardSkeleton";
 import type { Conversion } from "../types";
 
 const Results = () => {
@@ -53,14 +54,6 @@ const Results = () => {
     navigate("/");
   };
 
-  if (loading) {
-    return (
-      <div className="w-full mx-auto p-8 bg-[#240837] rounded-lg border border-[#87e2ae] shadow-lg">
-        <div className="text-white text-center">Cargando...</div>
-      </div>
-    );
-  }
-
   return (
     <div className="w-full mx-auto p-8 bg-[#240837] rounded-lg border border-[#87e2ae] shadow-lg">
       <h1 className="text-3xl font-bold text-center mb-8 text-white">
@@ -85,14 +78,19 @@ const Results = () => {
             </div>
           ) : (
             <div className="grid gap-4">
-              {conversions.map((conversion) => (
-                <ResultCard
-                  key={conversion.currency}
-                  currency={conversion.currency}
-                  rate={conversion.rate}
-                  amount={conversion.amount}
-                />
-              ))}
+              {loading
+                ? // Show 3 skeleton cards while loading
+                  Array.from({ length: 3 }).map((_, index) => (
+                    <ResultCardSkeleton key={index} />
+                  ))
+                : conversions.map((conversion) => (
+                    <ResultCard
+                      key={conversion.currency}
+                      currency={conversion.currency}
+                      rate={conversion.rate}
+                      amount={conversion.amount}
+                    />
+                  ))}
             </div>
           )}
         </div>

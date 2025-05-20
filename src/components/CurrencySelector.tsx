@@ -3,6 +3,7 @@ import Chevron from "./icons/Chevron";
 import { getCurrencies } from "../api/coinbase";
 import type { Currency, CurrencySelectorProps } from "../types";
 import { getStoredCurrencies, setStoredCurrencies } from "../utils/storage";
+import CurrencySelectorSkeleton from "./CurrencySelectorSkeleton";
 
 const CurrencySelector = ({ onCurrenciesChange }: CurrencySelectorProps) => {
   const [currencies, setCurrencies] = useState<Currency[]>([]);
@@ -10,15 +11,19 @@ const CurrencySelector = ({ onCurrenciesChange }: CurrencySelectorProps) => {
     useState<string[]>(getStoredCurrencies);
   const [error, setError] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchCurrencies = async () => {
       try {
+        setIsLoading(true);
         const data = await getCurrencies();
         setCurrencies(data);
       } catch {
         setError("Error al cargar las divisas. Por favor, intente nuevamente.");
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -74,6 +79,10 @@ const CurrencySelector = ({ onCurrenciesChange }: CurrencySelectorProps) => {
     return (
       <div className="text-red-400 bg-red-900/20 p-3 rounded-md">{error}</div>
     );
+  }
+
+  if (isLoading) {
+    return <CurrencySelectorSkeleton />;
   }
 
   return (
