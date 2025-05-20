@@ -1,14 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Chevron from "./icons/Chevron";
-
-interface Currency {
-  id: string;
-  name: string;
-}
-
-interface CurrencySelectorProps {
-  onCurrenciesChange: (currencies: string[]) => void;
-}
+import { getCurrencies } from "../api/coinbase";
+import type { Currency, CurrencySelectorProps } from "../types";
 
 const CurrencySelector = ({ onCurrenciesChange }: CurrencySelectorProps) => {
   const [currencies, setCurrencies] = useState<Currency[]>([]);
@@ -20,11 +13,8 @@ const CurrencySelector = ({ onCurrenciesChange }: CurrencySelectorProps) => {
   useEffect(() => {
     const fetchCurrencies = async () => {
       try {
-        const response = await fetch("https://api.coinbase.com/v2/currencies");
-        const data = await response.json();
-        if (data.data) {
-          setCurrencies(data.data);
-        }
+        const data = await getCurrencies();
+        setCurrencies(data);
       } catch {
         setError("Error al cargar las divisas. Por favor, intente nuevamente.");
       }
